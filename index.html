@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OD Controls — Sales & Marketing Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0B0D;
+    --bg-2: #14161A;
+    --bg-3: #1C1F24;
+    --line: #2A2D33;
+    --ink: #EDEEF0;
+    --muted: #8A8F99;
+    --muted-2: #5A5F69;
+    --amber: #F5A524;
+    --amber-dim: #8A5B12;
+    --green: #22C55E;
+    --red: #EF4444;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .display { font-family: 'Antonio', sans-serif; letter-spacing: -0.01em; }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--amber);
+    color: var(--bg);
+    padding: 8px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 0.05em;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar .pulse {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--bg); display: inline-block; margin-right: 6px;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+  .progress-pill {
+    background: var(--bg);
+    color: var(--amber);
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-size: 10px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 80px 32px 48px 32px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: 32px; top: 80px;
+    width: 2px; height: calc(100% - 100px);
+    background: var(--amber);
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; padding-left: 24px; }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--amber);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Antonio', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.92;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 .amber { color: var(--amber); }
+  .hero .sub {
+    color: var(--muted);
+    margin-top: 18px;
+    max-width: 640px;
+    font-size: 16px;
+  }
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .meta-row .cell .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted-2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .meta-row .cell .val {
+    font-family: 'Antonio', sans-serif;
+    font-size: 22px;
+    color: var(--ink);
+  }
+  .meta-row .cell .val.amber { color: var(--amber); }
+
+  /* SECTIONS */
+  section {
+    padding: 64px 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--amber);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .section-head h2 {
+    font-family: 'Antonio', sans-serif;
+    font-size: clamp(32px, 4.5vw, 48px);
+    text-transform: uppercase;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .section-sub {
+    color: var(--muted);
+    margin-top: 6px;
+    margin-bottom: 32px;
+    max-width: 640px;
+  }
+  .amber-rule {
+    width: 48px; height: 2px; background: var(--amber);
+    margin: 12px 0 32px 0;
+  }
+
+  /* STEP CARD */
+  .ticket {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--amber);
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 18px;
+    align-items: start;
+    transition: background 0.2s, border-color 0.2s;
+    position: relative;
+  }
+  .ticket:hover { background: var(--bg-3); }
+  .ticket.done { opacity: 0.4; border-left-color: var(--green); }
+  .ticket.done .ticket-title { text-decoration: line-through; }
+
+  /* CHECKBOX */
+  .check {
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--muted-2);
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.15s;
+    margin-top: 2px;
+  }
+  .check:hover { border-color: var(--amber); }
+  .ticket.done .check {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .ticket.done .check::after {
+    content: '';
+    position: absolute;
+    left: 6px; top: 2px;
+    width: 6px; height: 11px;
+    border: solid var(--bg);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .ticket-body { min-width: 0; }
+  .ticket-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .ticket-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .ticket-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .ticket-desc a {
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--amber-dim);
+  }
+  .ticket-desc a:hover { border-bottom-style: solid; }
+  .ticket-desc code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: var(--bg);
+    padding: 1px 5px;
+    border-radius: 2px;
+    color: var(--amber);
+  }
+  .ticket-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted-2);
+    letter-spacing: 0.1em;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .priority {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 8.5px;
+    font-weight: 700;
+    margin-left: 6px;
+  }
+  .priority.p1 { background: var(--amber); color: var(--bg); }
+  .priority.p2 { background: var(--bg-3); color: var(--amber); border: 1px solid var(--amber-dim); }
+  .priority.p3 { background: transparent; color: var(--muted-2); border: 1px solid var(--muted-2); }
+
+  /* PLATFORM CARD (channels) */
+  .channel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .channel {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: 22px;
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .channel:hover { border-color: var(--amber-dim); transform: translateY(-2px); }
+  .channel .ch-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .channel .ch-name {
+    font-family: 'Antonio', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+  .channel .ch-tier {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--amber);
+    border: 1px solid var(--amber-dim);
+    padding: 2px 6px;
+    letter-spacing: 0.1em;
+  }
+  .channel .ch-desc {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 14px;
+    line-height: 1.55;
+  }
+  .channel .ch-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 16px;
+    font-size: 11px;
+    margin-bottom: 16px;
+    padding: 10px 0;
+    border-top: 1px dashed var(--line);
+    border-bottom: 1px dashed var(--line);
+  }
+  .channel .ch-meta div { display: flex; justify-content: space-between; }
+  .channel .ch-meta .k {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted-2);
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .channel .ch-meta .v { color: var(--ink); font-weight: 500; }
+  .channel a.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--amber);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    border: 1px solid var(--amber-dim);
+    transition: all 0.15s;
+  }
+  .channel a.btn:hover {
+    background: var(--amber);
+    color: var(--bg);
+    border-color: var(--amber);
+  }
+  .channel a.btn::after { content: ' →'; }
+
+  /* SEO TABLE */
+  .seo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .seo-card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: 16px 18px;
+  }
+  .seo-card h4 {
+    font-family: 'Antonio', sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-bottom: 4px;
+    letter-spacing: -0.005em;
+  }
+  .seo-card .kw-list {
+    list-style: none;
+    margin-top: 12px;
+  }
+  .seo-card .kw-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .seo-card .kw-list li:last-child { border: 0; }
+  .seo-card .kw-list .kw { color: var(--ink); }
+  .seo-card .kw-list .vol {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .seo-card .kw-list .star { color: var(--amber); margin-left: 4px; font-size: 10px; }
+
+  /* WEEKLY CADENCE */
+  .cadence {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .day {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: 16px 18px;
+    position: relative;
+  }
+  .day .dlabel {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--amber);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+  .day .dtask {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .day .dtask + .dtask {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--line);
+  }
+
+  /* CTA box */
+  .cta {
+    background: linear-gradient(135deg, var(--bg-2) 0%, var(--bg-3) 100%);
+    border: 1px solid var(--amber-dim);
+    padding: 28px 32px;
+    margin-top: 24px;
+    position: relative;
+  }
+  .cta::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--amber);
+  }
+  .cta .cta-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--amber);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .cta h3 {
+    font-family: 'Antonio', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .cta p { color: var(--muted); font-size: 14px; }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 32px;
+    text-align: center;
+    color: var(--muted-2);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+  footer .reset-btn {
+    margin-top: 12px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+  }
+  footer .reset-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* Mobile */
+  @media (max-width: 720px) {
+    .meta-row { grid-template-columns: repeat(2, 1fr); }
+    section { padding: 48px 20px; }
+    .hero { padding: 56px 20px 36px 20px; }
+    .hero::before { left: 20px; }
+    .hero-inner { padding-left: 16px; }
+    .ticket {
+      grid-template-columns: auto 1fr;
+    }
+    .ticket-meta {
+      grid-column: 1 / -1;
+      text-align: left;
+      padding-left: 40px;
+      margin-top: -4px;
+    }
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white; color: black; }
+    .topbar, footer .reset-btn { display: none; }
+    section { page-break-inside: avoid; }
+    .ticket, .channel, .seo-card, .day {
+      background: white; color: black; border-color: #ccc;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span><span class="pulse"></span>OD CONTROLS · SALES &amp; MARKETING PLAYBOOK · V1.0</span>
+  <span class="progress-pill">PROGRESS <span id="progress">0/0</span></span>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">/ INTERNAL OPS  //  JAYDON + BAFANA</div>
+    <h1>HOW WE<br>GET <span class="amber">PAID.</span></h1>
+    <p class="sub">A step-by-step playbook. Foundation → contracts → SEO → outbound → close. Tick items as you go.</p>
+
+    <div class="meta-row">
+      <div class="cell">
+        <div class="label">FOCUS</div>
+        <div class="val">Sales &amp; Marketing</div>
+      </div>
+      <div class="cell">
+        <div class="label">TIMEFRAME</div>
+        <div class="val amber">90 days</div>
+      </div>
+      <div class="cell">
+        <div class="label">GOAL</div>
+        <div class="val">£10K MRR</div>
+      </div>
+      <div class="cell">
+        <div class="label">CHANNELS</div>
+        <div class="val">8 live</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 01 FOUNDATION -->
+<section>
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">/ 01 — FOUNDATION</div>
+    </div>
+    <h2>WEEK 1. UNBLOCK SALES.</h2>
+    <div class="amber-rule"></div>
+    <p class="section-sub">None of this is sales work, but until it's done we can't quote, can't get on tender lists, can't take payment.</p>
+
+    <div class="ticket" data-id="f1">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">F-01</div>
+        <div class="ticket-title">Register OD Controls Ltd</div>
+        <div class="ticket-desc">Companies House. £50, 24hr turnaround. Jaydon = MD, Bafana = Technical Director. <a href="https://www.gov.uk/limited-company-formation" target="_blank">gov.uk/limited-company-formation</a></div>
+      </div>
+      <div class="ticket-meta">DAY 1<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="f2">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">F-02</div>
+        <div class="ticket-title">Shareholder agreement signed</div>
+        <div class="ticket-desc">Equity split, vesting, exit clauses. Before any revenue hits. Use Sparqa or a 1hr solicitor call (~£300).</div>
+      </div>
+      <div class="ticket-meta">DAY 1<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="f3">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">F-03</div>
+        <div class="ticket-title">Buy domains</div>
+        <div class="ticket-desc"><code>odcontrols.co.uk</code> + <code>.com</code> + <code>ondemandcontrols.co.uk</code>. Cloudflare or Namecheap. ~£50.</div>
+      </div>
+      <div class="ticket-meta">DAY 1<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="f4">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">F-04</div>
+        <div class="ticket-title">London 020 number live</div>
+        <div class="ticket-desc"><a href="https://www.voipfone.co.uk" target="_blank">VoIPfone</a> ~£5/mo. Forwards to Bafana day, Jaydon nights. Replace <code>020 0000 0000</code> on the site.</div>
+      </div>
+      <div class="ticket-meta">DAY 2<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="f5">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">F-05</div>
+        <div class="ticket-title">Google Workspace + emails live</div>
+        <div class="ticket-desc"><code>hello@</code>, <code>emergency@</code>, <code>jaydon@</code>, <code>bafana@</code> on odcontrols.co.uk. £6/user/mo.</div>
+      </div>
+      <div class="ticket-meta">DAY 2<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="f6">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">F-06</div>
+        <div class="ticket-title">£5M PL + EL insurance</div>
+        <div class="ticket-desc"><a href="https://www.hiscox.co.uk" target="_blank">Hiscox</a> or <a href="https://www.simplybusiness.co.uk" target="_blank">Simply Business</a>. Cert needed for every tender.</div>
+      </div>
+      <div class="ticket-meta">DAY 3<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="f7">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">F-07</div>
+        <div class="ticket-title">Business bank</div>
+        <div class="ticket-desc"><a href="https://www.tide.co" target="_blank">Tide</a> or <a href="https://www.starlingbank.com" target="_blank">Starling</a>. Open via app, ~10 min.</div>
+      </div>
+      <div class="ticket-meta">DAY 3<span class="priority p2">P2</span></div>
+    </div>
+
+    <div class="ticket" data-id="f8">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">F-08</div>
+        <div class="ticket-title">VAT registered</div>
+        <div class="ticket-desc">Do it now, don't wait for £90k threshold. Commercial buyers expect VAT invoices. <a href="https://www.gov.uk/register-for-vat" target="_blank">gov.uk/register-for-vat</a></div>
+      </div>
+      <div class="ticket-meta">DAY 4<span class="priority p2">P2</span></div>
+    </div>
+
+    <div class="ticket" data-id="f9">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">F-09</div>
+        <div class="ticket-title">Site placeholders purged</div>
+        <div class="ticket-desc">Replace phone, emails, reg number on <code>zorian.github.io/vanguard-bms</code>. Point <code>odcontrols.co.uk</code> at GitHub Pages.</div>
+      </div>
+      <div class="ticket-meta">DAY 5<span class="priority p1">P1</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 ACCREDITATIONS -->
+<section>
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">/ 02 — ACCREDITATIONS</div>
+    </div>
+    <h2>WEEK 2. GET ON THE LISTS.</h2>
+    <div class="amber-rule"></div>
+    <p class="section-sub">These three logos = entry ticket to commercial tenders. Without them most procurement gates are closed.</p>
+
+    <div class="ticket" data-id="a1">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">A-01</div>
+        <div class="ticket-title">BCIA Membership</div>
+        <div class="ticket-desc">Building Controls Industry Association. The trade body. Instant credibility. ~£550/yr. <a href="https://bcia.co.uk/membership/" target="_blank">bcia.co.uk/membership</a> · Verdict in 4–8 weeks.</div>
+      </div>
+      <div class="ticket-meta">WK 2<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="a2">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">A-02</div>
+        <div class="ticket-title">SafeContractor / CHAS</div>
+        <div class="ticket-desc">Pick one. SafeContractor ~£430/yr, CHAS ~£300/yr. Tender gold for FM clients. <a href="https://www.safecontractor.com" target="_blank">safecontractor.com</a> · <a href="https://www.chas.co.uk" target="_blank">chas.co.uk</a></div>
+      </div>
+      <div class="ticket-meta">WK 2<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="a3">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">A-03</div>
+        <div class="ticket-title">Constructionline Gold</div>
+        <div class="ticket-desc">Pre-qualification platform used by every major contractor. ~£600/yr. Bronze is free but Gold opens the tier-1 sub-contracting work. <a href="https://www.constructionline.co.uk" target="_blank">constructionline.co.uk</a></div>
+      </div>
+      <div class="ticket-meta">WK 2<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="a4">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">A-04</div>
+        <div class="ticket-title">Achilles UVDB</div>
+        <div class="ticket-desc">Utility &amp; FM industry pre-qualification. Useful for hospital, utility, and large estate work. <a href="https://www.achilles.com/community/uvdb/" target="_blank">achilles.com/community/uvdb</a></div>
+      </div>
+      <div class="ticket-meta">WK 3<span class="priority p2">P2</span></div>
+    </div>
+
+    <div class="ticket" data-id="a5">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">A-05</div>
+        <div class="ticket-title">Trend / Tridium approved installer status</div>
+        <div class="ticket-desc">Get OD Controls listed on the manufacturer's "find an installer" directory. Free, manufacturer-direct leads, backlinks. Contact Trend &amp; Tridium UK rep.</div>
+      </div>
+      <div class="ticket-meta">WK 3<span class="priority p2">P2</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 SALES CHANNELS -->
+<section>
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">/ 03 — SALES CHANNELS</div>
+    </div>
+    <h2>WHERE THE WORK COMES FROM.</h2>
+    <div class="amber-rule"></div>
+    <p class="section-sub">Eight active channels. Apply for all of them in weeks 2–4. Each one feeds a different lane: reactive cash, project pipeline, retainer book.</p>
+
+    <div class="channel-grid">
+
+      <div class="channel">
+        <div class="ch-head">
+          <div class="ch-name">Plentific</div>
+          <div class="ch-tier">REACTIVE</div>
+        </div>
+        <div class="ch-desc">UK's biggest reactive maintenance platform. Councils, housing associations, big landlords. Same-day / next-day call-outs.</div>
+        <div class="ch-meta">
+          <div><span class="k">Value</span><span class="v">£300–£700/job</span></div>
+          <div><span class="k">Volume</span><span class="v">6–10/mo</span></div>
+          <div><span class="k">Setup</span><span class="v">1 week</span></div>
+          <div><span class="k">In name of</span><span class="v">Bafana</span></div>
+        </div>
+        <a class="btn" href="https://www.plentific.com/contractors" target="_blank">Apply</a>
+      </div>
+
+      <div class="channel">
+        <div class="ch-head">
+          <div class="ch-name">Contracts Finder</div>
+          <div class="ch-tier">GOV TENDER</div>
+        </div>
+        <div class="ch-desc">UK gov portal. NHS, councils, MoD estates publish BMS &amp; controls tenders here. Set keyword alerts: "BMS", "building management", "Trend", "controls".</div>
+        <div class="ch-meta">
+          <div><span class="k">Value</span><span class="v">£10k–£250k</span></div>
+          <div><span class="k">Volume</span><span class="v">2–5/wk</span></div>
+          <div><span class="k">Setup</span><span class="v">10 min</span></div>
+          <div><span class="k">Cost</span><span class="v">Free</span></div>
+        </div>
+        <a class="btn" href="https://www.contractsfinder.service.gov.uk" target="_blank">Register</a>
+      </div>
+
+      <div class="channel">
+        <div class="ch-head">
+          <div class="ch-name">Find a Tender</div>
+          <div class="ch-tier">GOV TENDER</div>
+        </div>
+        <div class="ch-desc">High-value (£139k+) public sector contracts. Healthcare trusts, large estates, universities. Same alerts as Contracts Finder.</div>
+        <div class="ch-meta">
+          <div><span class="k">Value</span><span class="v">£139k+</span></div>
+          <div><span class="k">Volume</span><span class="v">1–3/wk</span></div>
+          <div><span class="k">Setup</span><span class="v">10 min</span></div>
+          <div><span class="k">Cost</span><span class="v">Free</span></div>
+        </div>
+        <a class="btn" href="https://www.find-tender.service.gov.uk" target="_blank">Register</a>
+      </div>
+
+      <div class="channel">
+        <div class="ch-head">
+          <div class="ch-name">NHS Atamis</div>
+          <div class="ch-tier">VERTICAL</div>
+        </div>
+        <div class="ch-desc">Central NHS procurement platform. All NHS trusts publish their FM &amp; estates contracts here. Niche but high-value.</div>
+        <div class="ch-meta">
+          <div><span class="k">Value</span><span class="v">£25k–£500k</span></div>
+          <div><span class="k">Volume</span><span class="v">5–10/mo</span></div>
+          <div><span class="k">Setup</span><span class="v">30 min</span></div>
+          <div><span class="k">Cost</span><span class="v">Free</span></div>
+        </div>
+        <a class="btn" href="https://atamis-1928.my.salesforce-sites.com/s/Welcome" target="_blank">Register</a>
+      </div>
+
+      <div class="channel">
+        <div class="ch-head">
+          <div class="ch-name">LinkedIn Sales Nav</div>
+          <div class="ch-tier">OUTBOUND</div>
+        </div>
+        <div class="ch-desc">Target: Facilities Directors, Chief Engineers, Head of M&amp;E at hotel groups, hospital trusts, REITs, FM giants (CBRE, JLL, Sodexo, Mitie). Sell the Health Check, not the install.</div>
+        <div class="ch-meta">
+          <div><span class="k">Value</span><span class="v">£1.5–25k</span></div>
+          <div><span class="k">Volume</span><span class="v">50 DMs/wk</span></div>
+          <div><span class="k">Setup</span><span class="v">2 days</span></div>
+          <div><span class="k">Cost</span><span class="v">~£80/mo</span></div>
+        </div>
+        <a class="btn" href="https://business.linkedin.com/sales-solutions" target="_blank">Start</a>
+      </div>
+
+      <div class="channel">
+        <div class="ch-head">
+          <div class="ch-name">M&amp;E Subcontracting</div>
+          <div class="ch-tier">PARTNERSHIP</div>
+        </div>
+        <div class="ch-desc">Direct outreach to M&amp;E primes who don't have an in-house BMS arm: NG Bailey, SES Engineering, Imtech, Briggs &amp; Forrester. They win the main contract → sub the BMS to us.</div>
+        <div class="ch-meta">
+          <div><span class="k">Value</span><span class="v">£15k–£200k</span></div>
+          <div><span class="k">Volume</span><span class="v">1–4/quarter</span></div>
+          <div><span class="k">Setup</span><span class="v">8 wks</span></div>
+          <div><span class="k">Approach</span><span class="v">Direct DM</span></div>
+        </div>
+        <a class="btn" href="https://www.linkedin.com/search/results/people/?keywords=%22M%26E%20procurement%22%20OR%20%22subcontractor%20manager%22" target="_blank">Find contacts</a>
+      </div>
+
+      <div class="channel">
+        <div class="ch-head">
+          <div class="ch-name">FM Giants Direct</div>
+          <div class="ch-tier">PARTNERSHIP</div>
+        </div>
+        <div class="ch-desc">CBRE GWS, JLL, Sodexo, ISS, Mitie FM. Their estates teams sub BMS work constantly. Find the contracts manager for the client portfolio you want and pitch direct.</div>
+        <div class="ch-meta">
+          <div><span class="k">Value</span><span class="v">PPM retainer</span></div>
+          <div><span class="k">Volume</span><span class="v">Portfolio</span></div>
+          <div><span class="k">Setup</span><span class="v">6 wks</span></div>
+          <div><span class="k">Approach</span><span class="v">Warm intro &gt; cold</span></div>
+        </div>
+        <a class="btn" href="https://www.linkedin.com/search/results/people/?keywords=%22BMS%22%20%22CBRE%22" target="_blank">Search</a>
+      </div>
+
+      <div class="channel">
+        <div class="ch-head">
+          <div class="ch-name">Referral Programme</div>
+          <div class="ch-tier">NETWORK</div>
+        </div>
+        <div class="ch-desc">£500 finder's fee on any deal &gt; £5k that closes. WhatsApp broadcast to existing network (Abdul-tier contacts). Cheapest CAC you'll ever get.</div>
+        <div class="ch-meta">
+          <div><span class="k">Value</span><span class="v">£5k+ deals</span></div>
+          <div><span class="k">Volume</span><span class="v">1–3/mo</span></div>
+          <div><span class="k">Setup</span><span class="v">1 day</span></div>
+          <div><span class="k">Cost</span><span class="v">£500/win</span></div>
+        </div>
+        <a class="btn" href="#">Draft message</a>
+      </div>
+
+    </div>
+
+    <div class="cta">
+      <div class="cta-label">RULE</div>
+      <h3>Plentific = cash flow. The rest = asset value.</h3>
+      <p>Cap Plentific at 30% of monthly revenue. It pays the bills while we build the retainer book through outbound &amp; tenders.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 OUTBOUND PLAY -->
+<section>
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">/ 04 — OUTBOUND PLAY</div>
+    </div>
+    <h2>THE PITCH. THE WEDGE.</h2>
+    <div class="amber-rule"></div>
+    <p class="section-sub">Don't sell installs. Sell the BMS Health Check. £1,500 audit. Low commitment. 70% of audits convert to a retainer or install.</p>
+
+    <div class="ticket" data-id="o1">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">O-01</div>
+        <div class="ticket-title">Build target list — 200 contacts</div>
+        <div class="ticket-desc">LinkedIn Sales Nav. Filter: Facilities Director / Chief Engineer / Head of Estates · London + M25 · Hotels (4–5★) / Hospitals / REITs / Data centres. Export to Airtable.</div>
+      </div>
+      <div class="ticket-meta">WK 2<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="o2">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">O-02</div>
+        <div class="ticket-title">Write the wedge message</div>
+        <div class="ticket-desc">3 lines max. Hook: "Most BMS systems in London hotels are 15-30% over-spending on energy." Offer: free 30-min review or £1.5k Health Check. Proof: Hilton-grade portfolio.</div>
+      </div>
+      <div class="ticket-meta">WK 2<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="o3">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">O-03</div>
+        <div class="ticket-title">Send 50 LinkedIn DMs / week</div>
+        <div class="ticket-desc">10/day, Mon–Fri. Track in Airtable. Expected reply rate 8–12%. Expected booked-call rate 2–4%. Target: 2+ calls/wk by week 4.</div>
+      </div>
+      <div class="ticket-meta">WK 3+<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="o4">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">O-04</div>
+        <div class="ticket-title">AI outbound caller live</div>
+        <div class="ticket-desc">Build a <a href="https://vapi.ai" target="_blank">Vapi.ai</a> or <a href="https://bland.ai" target="_blank">Bland.ai</a> agent (~£0.07/min). Calls cold lists Mon–Fri 10:00–16:00. Script: qualify on BMS brand, age, fault history, decision-maker. Books a 15-min call with Bafana.</div>
+      </div>
+      <div class="ticket-meta">WK 4<span class="priority p2">P2</span></div>
+    </div>
+
+    <div class="ticket" data-id="o5">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">O-05</div>
+        <div class="ticket-title">Build the BMS Health Check report template</div>
+        <div class="ticket-desc">12-page branded PDF. Sections: site overview · controller audit · sensor calibration · control loops · energy waste · prioritised remediation. Use template for every audit — 5-day turnaround standard.</div>
+      </div>
+      <div class="ticket-meta">WK 3<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="o6">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">O-06</div>
+        <div class="ticket-title">Add /health-check page to site</div>
+        <div class="ticket-desc">Scope, fixed pricing (£1.5k / £2.5k / £3.5k by sqft), sample report download, single CTA: "Book a site survey". Becomes primary conversion path.</div>
+      </div>
+      <div class="ticket-meta">WK 3<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="o7">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">O-07</div>
+        <div class="ticket-title">Upsell ladder defined</div>
+        <div class="ticket-desc">Health Check (£1.5–3k) → remediation work (£5–25k) → monitoring retainer (£750–£2k/mo) → OD Pulse AI dashboard (+£400/mo). Every quote shows the ladder.</div>
+      </div>
+      <div class="ticket-meta">WK 4<span class="priority p2">P2</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SEO -->
+<section>
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">/ 05 — SEO</div>
+    </div>
+    <h2>GET FOUND. NOT PAID ADS.</h2>
+    <div class="amber-rule"></div>
+    <p class="section-sub">B2B BMS buyers Google specific terms. Rank for 3-5 of them and inbound takes care of itself. Zero paid ads — they don't convert in this niche.</p>
+
+    <div class="seo-grid">
+
+      <div class="seo-card">
+        <h4>Target Keywords</h4>
+        <p style="color: var(--muted); font-size: 12px; margin-top: 4px;">Build a dedicated landing page per keyword. ★★★ = priority.</p>
+        <ul class="kw-list">
+          <li><span class="kw">BMS engineer London</span><span class="vol">~210/mo <span class="star">★★★</span></span></li>
+          <li><span class="kw">emergency BMS call out London</span><span class="vol">~70/mo <span class="star">★★★</span></span></li>
+          <li><span class="kw">BMS maintenance contract</span><span class="vol">~80/mo <span class="star">★★★</span></span></li>
+          <li><span class="kw">Trend BMS engineer</span><span class="vol">~90/mo <span class="star">★★★</span></span></li>
+          <li><span class="kw">Tridium Niagara engineer UK</span><span class="vol">~110/mo <span class="star">★★</span></span></li>
+          <li><span class="kw">Johnson Controls Metasys engineer</span><span class="vol">~50/mo <span class="star">★★</span></span></li>
+          <li><span class="kw">hotel BMS engineer</span><span class="vol">~40/mo <span class="star">★★</span></span></li>
+          <li><span class="kw">data centre BMS</span><span class="vol">~60/mo <span class="star">★★</span></span></li>
+          <li><span class="kw">BMS upgrade cost</span><span class="vol">~140/mo <span class="star">★★</span></span></li>
+        </ul>
+      </div>
+
+      <div class="seo-card">
+        <h4>Pages To Build</h4>
+        <p style="color: var(--muted); font-size: 12px; margin-top: 4px;">Add these to the site. One keyword per URL.</p>
+        <ul class="kw-list">
+          <li><span class="kw">/services/emergency</span><span class="vol">P1</span></li>
+          <li><span class="kw">/services/maintenance</span><span class="vol">P1</span></li>
+          <li><span class="kw">/services/health-check</span><span class="vol">P1</span></li>
+          <li><span class="kw">/systems/trend</span><span class="vol">P1</span></li>
+          <li><span class="kw">/systems/tridium</span><span class="vol">P2</span></li>
+          <li><span class="kw">/systems/johnson-controls</span><span class="vol">P2</span></li>
+          <li><span class="kw">/sectors/hotels</span><span class="vol">P2</span></li>
+          <li><span class="kw">/sectors/data-centres</span><span class="vol">P2</span></li>
+          <li><span class="kw">/london/canary-wharf</span><span class="vol">P3</span></li>
+          <li><span class="kw">/london/city</span><span class="vol">P3</span></li>
+        </ul>
+      </div>
+
+      <div class="seo-card">
+        <h4>Off-Site Authority</h4>
+        <p style="color: var(--muted); font-size: 12px; margin-top: 4px;">Backlinks &amp; profile listings.</p>
+        <ul class="kw-list">
+          <li><span class="kw">Google Business Profile</span><span class="vol">P1</span></li>
+          <li><span class="kw">BCIA member directory</span><span class="vol">P1</span></li>
+          <li><span class="kw">Trend approved installer list</span><span class="vol">P1</span></li>
+          <li><span class="kw">Tridium installer directory</span><span class="vol">P1</span></li>
+          <li><span class="kw">LinkedIn company page</span><span class="vol">P1</span></li>
+          <li><span class="kw">Yell business listing</span><span class="vol">P2</span></li>
+          <li><span class="kw">Bark.com pro profile</span><span class="vol">P2</span></li>
+          <li><span class="kw">BESA, CIBSE listings</span><span class="vol">P2</span></li>
+          <li><span class="kw">HVAC News, BSEE press</span><span class="vol">P3</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="ticket" data-id="s1" style="margin-top: 24px;">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">S-01</div>
+        <div class="ticket-title">Google Business Profile verified</div>
+        <div class="ticket-desc">London address, all services listed, 10+ photos of real job sites, weekly photo posts. Highest-ROI single SEO action. <a href="https://www.google.com/business" target="_blank">google.com/business</a></div>
+      </div>
+      <div class="ticket-meta">WK 1<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="s2">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">S-02</div>
+        <div class="ticket-title">Schema.org markup live</div>
+        <div class="ticket-desc">LocalBusiness + Service + FAQPage JSON-LD on the site. Gets us into Google's local pack &amp; rich results.</div>
+      </div>
+      <div class="ticket-meta">WK 2<span class="priority p2">P2</span></div>
+    </div>
+
+    <div class="ticket" data-id="s3">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">S-03</div>
+        <div class="ticket-title">Google Search Console connected</div>
+        <div class="ticket-desc">Verify domain, submit sitemap.xml. Track keyword rankings weekly. Free.</div>
+      </div>
+      <div class="ticket-meta">WK 2<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="s4">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">S-04</div>
+        <div class="ticket-title">LinkedIn company page — 3 posts/week</div>
+        <div class="ticket-desc">Job-site photos. "Today: Trend IQ4E commissioning in Mayfair." Bafana is doing this implicitly already — formalise it. Best B2B reach lever we have.</div>
+      </div>
+      <div class="ticket-meta">ONGOING<span class="priority p1">P1</span></div>
+    </div>
+
+    <div class="ticket" data-id="s5">
+      <div class="check"></div>
+      <div class="ticket-body">
+        <div class="ticket-id">S-05</div>
+        <div class="ticket-title">First case study page live</div>
+        <div class="ticket-desc">As soon as job #1 closes under OD Controls. URL: <code>/case-studies/[client-or-sector]</code>. Photos, scope, outcome. SEO + sales asset in one.</div>
+      </div>
+      <div class="ticket-meta">WK 6+<span class="priority p1">P1</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 WEEKLY CADENCE -->
+<section>
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-num">/ 06 — WEEKLY CADENCE</div>
+    </div>
+    <h2>WHAT WE DO EVERY WEEK.</h2>
+    <div class="amber-rule"></div>
+    <p class="section-sub">Once foundation is done, this is the operating rhythm. Don't let any day skip.</p>
+
+    <div class="cadence">
+      <div class="day">
+        <div class="dlabel">MONDAY</div>
+        <div class="dtask">Review weekend Plentific job board · accept 1–2</div>
+        <div class="dtask">Send 10 LinkedIn DMs from list</div>
+      </div>
+      <div class="day">
+        <div class="dlabel">TUESDAY</div>
+        <div class="dtask">Check Contracts Finder + Find a Tender · flag any to bid</div>
+        <div class="dtask">Send 10 LinkedIn DMs</div>
+      </div>
+      <div class="day">
+        <div class="dlabel">WEDNESDAY</div>
+        <div class="dtask">LinkedIn company post — job-site photo</div>
+        <div class="dtask">Outbound: 1 M&amp;E prime or FM giant contact</div>
+      </div>
+      <div class="day">
+        <div class="dlabel">THURSDAY</div>
+        <div class="dtask">Send 10 LinkedIn DMs</div>
+        <div class="dtask">Quote follow-ups (any quote &gt; 7 days old)</div>
+      </div>
+      <div class="day">
+        <div class="dlabel">FRIDAY</div>
+        <div class="dtask">Send 10 LinkedIn DMs</div>
+        <div class="dtask">LinkedIn post #2 — case study or system insight</div>
+        <div class="dtask">Weekly numbers: leads in, quotes out, jobs won</div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div class="cta-label">SUCCESS LOOKS LIKE — WEEK 12</div>
+      <h3>2 retainers signed. 3 Health Checks delivered. £8K MRR.</h3>
+      <p>Plus a Plentific cash floor of £3–4k/mo and a pipeline of 5+ qualified open tenders. From there, it scales.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>OD CONTROLS · ON DEMAND CONTROLS · INTERNAL · V1.0</div>
+  <div style="margin-top: 6px;">JAYDON + BAFANA · CONFIDENTIAL</div>
+  <button class="reset-btn" onclick="resetProgress()">RESET CHECKLIST</button>
+</footer>
+
+<script>
+  const STORAGE_KEY = 'od_controls_playbook_v1';
+
+  // Load + bind
+  function loadState() {
+    let state = {};
+    try {
+      state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    } catch (e) { state = {}; }
+    document.querySelectorAll('.ticket').forEach(t => {
+      const id = t.dataset.id;
+      if (state[id]) t.classList.add('done');
+    });
+    updateProgress();
+  }
+  function saveState() {
+    const state = {};
+    document.querySelectorAll('.ticket').forEach(t => {
+      if (t.classList.contains('done')) state[t.dataset.id] = true;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+  function updateProgress() {
+    const tickets = document.querySelectorAll('.ticket');
+    const done = document.querySelectorAll('.ticket.done').length;
+    document.getElementById('progress').textContent = `${done}/${tickets.length}`;
+  }
+  function resetProgress() {
+    if (!confirm('Clear all checkboxes?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    document.querySelectorAll('.ticket.done').forEach(t => t.classList.remove('done'));
+    updateProgress();
+  }
+
+  document.querySelectorAll('.ticket').forEach(t => {
+    t.querySelector('.check').addEventListener('click', () => {
+      t.classList.toggle('done');
+      saveState();
+      updateProgress();
+    });
+  });
+
+  loadState();
+</script>
+
+</body>
+</html>
